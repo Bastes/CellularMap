@@ -1,4 +1,5 @@
 require 'map/cell'
+require 'map/zone'
 
 module Map
   # =Map
@@ -15,12 +16,16 @@ module Map
       @store = {}
     end
 
-    # Accessing a cell.
+    # Accessing a cell or a zone.
     def [](x, y)
-      Cell.new(x, y, self)
+      if x.respond_to?(:to_i) && y.respond_to?(:to_i)
+        Cell.new(x, y, self)
+      else
+        Zone.new(x, y, self)
+      end
     end
 
-    # Putting a new content in a cell.
+    # Putting new content in a cell.
     def []=(x, y, content)
       if content.nil?
         @store.delete([x, y]) && nil

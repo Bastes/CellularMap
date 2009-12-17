@@ -13,8 +13,8 @@ module Map
     attr_reader :map
 
     def initialize(x, y, map) # :nodoc:
-      @x = x
-      @y = y
+      @x = x.to_i
+      @y = y.to_i
       @map = map
     end
     

@@ -1,14 +1,14 @@
 require 'test/helper'
 
 class MapTest < Test::Unit::TestCase
-  context("In a new map") {
+  context("In a map") {
     setup { @map = Map::Map.new }
 
     context("a random cell") {
       setup { @cell = @map[10, -7] }
 
       should("have the proper coordinates") {
-        assert_equal [10, -7], [@cell.x, @cell.y] }
+        assert_equal [10, -7, @map], [@cell.x, @cell.y, @cell.map] }
 
       should("be equal to itself") {
         assert_equal @map[10, -7], @cell }
@@ -42,6 +42,18 @@ class MapTest < Test::Unit::TestCase
 
       should("get another cell when substracted a vector") {
         assert_equal @map[-3, 5], @cell - [6, 3] }
+    }
+
+    context("looking at a random zone") {
+      setup { @zone = @map[-1..7, -3..2] }
+
+      should("have the right amount of cells") { assert_equal 54, @zone.length }
+
+      should("have the right dimensions") {
+        assert_equal [9, 6], [@zone.width, @zone.height] }
+
+      should("have the right boundaries") {
+        assert_equal [-1..7, -3..2, @map], [@zone.x, @zone.y, @zone.map] }
     }
   }
 end
