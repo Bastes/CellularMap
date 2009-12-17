@@ -2,7 +2,9 @@
 
 This gem helps creating unbounded two-dimensional cellular maps.
 
-==Map
+==Maps
+
+see Map::Map
 
 Generating a map is as easy as it sounds :
  map = Map::Map.new
@@ -10,7 +12,9 @@ Generating a map is as easy as it sounds :
 You can put things in the cells directly through the map :
  map[12, 7] = :whatever
 
-==Cell
+==Cells
+
+see Map::Cell
 
 Cells are accessed through the [] method :
  cell = map[-1, 5]
@@ -24,7 +28,9 @@ Move from one cell to the other using coordinate vectors simply like this :
  cell + [0, 5]
  cell - [-8, 9]
 
-==Zone
+==Zones
+
+see Map::Zone
 
 Zones are also accessed through the [] method, using at least one range for
 boundary :
@@ -40,3 +46,10 @@ instead of the map's :
  # same as : cell = map[1, -5]
  other_zone = zone[10..12, 9]
  # same as : zone = map[11..13, 16]
+
+==License
+
+Wanna read, use, reuse, change ? By all means please do, it's under GPL V3.
+
+see link:LICENSE for more details about the GPL V3, it's pretty awesome
+
