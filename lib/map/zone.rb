@@ -35,7 +35,18 @@ module Map
 
     # Access to a cell inside the zone.
     def [](x, y)
-      @map[@x.min + x.to_i, @y.min + y.to_i]
+      if x.respond_to?(:to_i) && y.respond_to?(:to_i)
+        @map[@x.min + x.to_i, @y.min + y.to_i]
+      else
+        x = x.to_i..x.to_i if x.respond_to?(:to_i)
+        y = y.to_i..y.to_i if y.respond_to?(:to_i)
+        @map[(@x.min + x.min)..(@x.min + x.max),
+             (@y.min + y.min)..(@y.min + y.max)]
+      end
+    end
+
+    def ==(other) # :nodoc:
+      [@x, @y, @map] == [other.x, other.y, other.map]
     end
   end
 end

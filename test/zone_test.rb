@@ -17,6 +17,9 @@ class ZoneTest < Test::Unit::TestCase
 
       should("allow access to cells relatively to boundaries") {
         assert_equal @map[2, 1], @zone[3, 4] }
+
+      should("allow access to other zones relatively to boundaries") {
+        assert_equal @map[-2..5, 6..11], @zone[-1..6, 9..14] }
     }
   }
 end
