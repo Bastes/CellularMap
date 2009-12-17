@@ -32,5 +32,10 @@ module Map
     def height
       @y.count
     end
+
+    # Access to a cell inside the zone.
+    def [](x, y)
+      @map[@x.min + x.to_i, @y.min + y.to_i]
+    end
   end
 end
