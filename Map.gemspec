@@ -10,13 +10,13 @@ Gem::Specification.new do |s|
   s.date = %q{2009-12-17}
   s.email = %q{michel.belleville@gmail.com}
   s.extra_rdoc_files = ["README"]
-  s.files = ["README", "LICENSE", "Rakefile", "lib/map", "lib/map/cell.rb", "lib/map/map.rb", "lib/map/zone.rb", "lib/map.rb", "test/helper.rb", "test/map_test.rb"]
+  s.files = ["README", "LICENSE", "Rakefile", "lib/map", "lib/map/cell.rb", "lib/map/map.rb", "lib/map/zone.rb", "lib/map.rb", "test/cell_test.rb", "test/helper.rb", "test/map_test.rb", "test/zone_test.rb"]
   s.homepage = %q{http://github.com/Bastes/Map/}
   s.rdoc_options = ["--line-numbers", "--inline-source"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.5}
   s.summary = %q{A simple 2d cellular maps.}
-  s.test_files = ["test/map_test.rb"]
+  s.test_files = ["test/cell_test.rb", "test/map_test.rb", "test/zone_test.rb"]
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
