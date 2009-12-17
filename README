@@ -1,0 +1,42 @@
+=Two dimensional cellular map
+
+This gem helps creating unbounded two-dimensional cellular maps.
+
+==Map
+
+Generating a map is as easy as it sounds :
+ map = Map::Map.new
+
+You can put things in the cells directly through the map :
+ map[12, 7] = :whatever
+
+==Cell
+
+Cells are accessed through the [] method :
+ cell = map[-1, 5]
+
+A cell have content :
+ cell.content
+ cell.content = "something"
+(an empty cell's content is nil)
+
+Move from one cell to the other using coordinate vectors simply like this :
+ cell + [0, 5]
+ cell - [-8, 9]
+
+==Zone
+
+Zones are also accessed through the [] method, using at least one range for
+boundary :
+ zone = map[0..7, 18..29]
+ zone = map[5, -1..6]
+ zone = map[-4..-2, 3]
+
+A zone allow pretty much the same kind of access to cells and other zones as
+maps, but the coordinates are relative to the lower coordinates of the zone
+instead of the map's :
+ zone = map[1..4, 3..7]
+ cell = zone[0, -8]
+ # same as : cell = map[1, -5]
+ other_zone = zone[10..12, 9]
+ # same as : zone = map[11..13, 16]
