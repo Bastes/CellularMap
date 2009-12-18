@@ -48,5 +48,12 @@ module Map
     def ==(other) # :nodoc:
       [@x, @y, @map] == [other.x, other.y, other.map]
     end
+
+    # Iterating over each cells inside the zone.
+    #
+    # (first lines, then columns)
+    def each # :yields: cell
+      @y.each { |y| @x.each { |x| yield Cell.new(x, y, @map) } }
+    end
   end
 end

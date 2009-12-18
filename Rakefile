@@ -21,7 +21,7 @@ task :shell do |t|
   exec 'irb -I lib/ -I lib/map -r map'
 end
  
-desc 'Generate documentation for the paperclip plugin.'
+desc 'Generate documentation for the map gem.'
 Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.rdoc_dir = 'doc'
   rdoc.title = 'Map'
