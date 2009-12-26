@@ -36,5 +36,14 @@ class MapTest < Test::Unit::TestCase
       assert_equal @sample, inside
       assert_equal @map, result
     }
+
+    should("be convertible to an array of cells") {
+      res = @map.to_a
+      assert res.is_a? Array
+      assert res.collect { |c| c.is_a? Map::Cell }.inject { |a, b| a && b }
+      inside = {}
+      res.each { |c| inside[[c.x, c.y]] = c.content }
+      assert_equal @sample, inside
+    }
   }
 end

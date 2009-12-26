@@ -38,19 +38,34 @@ class ZoneTest < Test::Unit::TestCase
       context("a certain zone") {
         setup {
           @range = -20..20
+          @positions = @range.to_a.collect { @range.to_a }.flatten.
+            zip(@range.to_a.collect{ |v| @range.to_a.collect { v } }.flatten)
           @zone = @map[@range, @range]
         }
 
         should("loop over all cells it contains") {
-          cells = @range.to_a.collect { @range.to_a }.flatten.
-            zip(@range.to_a.collect{ |v| @range.to_a.collect { v } }.flatten)
           inside = []
           @zone.each { |cell|
             pos = [cell.x, cell.y]
             assert_equal @sample[pos], cell.content
             inside << pos
           }
-          assert_equal cells, inside
+          assert_equal @positions, inside
+        }
+
+        should("be convertible to an array of all its cells") {
+          res = @zone.to_a
+          assert res.is_a? Array
+          assert res.collect { |r| r.is_a? Array }.inject { |a, b| a && b }
+          assert res.collect { |r| r.collect { |c| c.is_a? Map::Cell } }.
+            flatten.inject { |a, b| a && b }
+          inside = []
+          res.each { |row| row.each { |cell|
+            pos = [cell.x, cell.y]
+            assert_equal @sample[pos], cell.content
+            inside << pos
+          } }
+          assert_equal @positions, inside
         }
       }
     }

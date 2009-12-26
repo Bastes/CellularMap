@@ -51,9 +51,16 @@ module Map
 
     # Iterating over each cells inside the zone.
     #
-    # (first lines, then columns)
+    # (first to last lines, first to last columns for each line)
     def each # :yields: cell
       @y.each { |y| @x.each { |x| yield Cell.new(x, y, @map) } }
+    end
+
+    # Making an array of arrays of all cells inside the zone.
+    #
+    # (first to last lines, first to last columns for each line)
+    def to_a
+      @y.collect { |y| @x.collect { |x| Cell.new(x, y, @map) } }
     end
   end
 end

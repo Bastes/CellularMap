@@ -39,5 +39,10 @@ module Map
       @store.keys.each { |k| yield Cell.new(*(k + [self])) }
       self
     end
+
+    # Converts to map to an array of filled cells
+    def to_a
+      @store.keys.collect { |k| Cell.new(*(k + [self])) }
+    end
   end
 end
