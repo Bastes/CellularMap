@@ -37,6 +37,7 @@ module Map
     # Iterating over each filled cell.
     def each # :yields: cell
       @store.keys.each { |k| yield Cell.new(*(k + [self])) }
+      self
     end
   end
 end
