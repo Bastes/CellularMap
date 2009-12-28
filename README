@@ -4,17 +4,17 @@ This gem helps creating unbounded two-dimensional cellular maps.
 
 ==Maps
 
-see Map::Map
+see CellularMap::Map
 
 Generating a map is as easy as it sounds :
- map = Map::Map.new
+ map = CellularMap::Map.new
 
 You can put things in the cells directly through the map :
  map[12, 7] = :whatever
 
 ==Cells
 
-see Map::Cell
+see CellularMap::Cell
 
 Cells are accessed through the [] method :
  cell = map[-1, 5]
@@ -30,7 +30,7 @@ Move from one cell to the other using coordinate vectors simply like this :
 
 ==Zones
 
-see Map::Zone
+see CellularMap::Zone
 
 Zones are also accessed through the [] method, using at least one range for
 boundary :

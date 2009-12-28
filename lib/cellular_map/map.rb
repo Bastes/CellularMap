@@ -1,7 +1,7 @@
-require 'map/cell'
-require 'map/zone'
+require 'cellular_map/cell'
+require 'cellular_map/zone'
 
-module Map
+module CellularMap
   # =Map
   # 
   # Maps are limitless, only non-empty (nil content) cells are actually stored.

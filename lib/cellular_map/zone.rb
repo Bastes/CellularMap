@@ -1,4 +1,4 @@
-module Map
+module CellularMap
   # =Map zones
   #
   # Zones are generated on the fly to provide a wrapper to keep a map's zone

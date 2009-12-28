@@ -1,4 +1,4 @@
-module Map
+module CellularMap
   # =Map cells
   #
   # Cells are generated on the fly to provide a wrapper to access to the map's

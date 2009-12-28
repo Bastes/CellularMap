@@ -2,14 +2,14 @@ require 'test/helper'
 
 class MapTest < Test::Unit::TestCase
   context("An empty map cell") {
-    setup { @map = Map::Map.new }
+    setup { @map = CellularMap::Map.new }
 
     should("have no content") { assert_nil @map[-3, 15].content }
   }
 
   context("A map cell filled") {
     setup {
-      @map = Map::Map.new
+      @map = CellularMap::Map.new
       @map[-5, 22] = :something
     }
 
@@ -19,7 +19,7 @@ class MapTest < Test::Unit::TestCase
 
   context("A map with a bunch of cells filled") {
     setup {
-      @map = Map::Map.new
+      @map = CellularMap::Map.new
       @sample = {
         [1, 2]    => 'once upon a time',
         [35, -4]  => 'there ware a hash',
@@ -40,7 +40,8 @@ class MapTest < Test::Unit::TestCase
     should("be convertible to an array of cells") {
       res = @map.to_a
       assert res.is_a? Array
-      assert res.collect { |c| c.is_a? Map::Cell }.inject { |a, b| a && b }
+      assert res.collect { |c| c.is_a? CellularMap::Cell }.
+        inject { |a, b| a && b }
       inside = {}
       res.each { |c| inside[[c.x, c.y]] = c.content }
       assert_equal @sample, inside

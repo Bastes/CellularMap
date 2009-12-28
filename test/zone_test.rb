@@ -2,7 +2,7 @@ require 'test/helper'
 
 class ZoneTest < Test::Unit::TestCase
   context("In a map") {
-    setup { @map = Map::Map.new }
+    setup { @map = CellularMap::Map.new }
 
     context("a random zone") {
       setup { @zone = @map[-1..7, -3..2] }
@@ -57,7 +57,7 @@ class ZoneTest < Test::Unit::TestCase
           res = @zone.to_a
           assert res.is_a? Array
           assert res.collect { |r| r.is_a? Array }.inject { |a, b| a && b }
-          assert res.collect { |r| r.collect { |c| c.is_a? Map::Cell } }.
+          assert res.collect { |r| r.collect { |c| c.is_a? CellularMap::Cell }}.
             flatten.inject { |a, b| a && b }
           inside = []
           res.each { |row| row.each { |cell|

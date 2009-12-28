@@ -3,28 +3,28 @@ require 'rake/testtask'
 require 'rake/rdoctask'
  
 $LOAD_PATH.unshift('lib')
-require 'map'
+require 'cellular_map'
  
 desc 'Default: run unit tests.'
 task :default => [:clean, :test]
  
-desc 'Test the map gem.'
+desc 'Test the cellular map gem.'
 Rake::TestTask.new(:test) do |t|
-  t.libs << 'lib'
-  t.pattern = 'test/**/*_test.rb'
-  t.verbose = true
+t.libs << 'lib'
+t.pattern = 'test/**/*_test.rb'
+t.verbose = true
 end
- 
+
 desc 'Start an IRB session with all necessary files required.'
 task :shell do |t|
-  chdir File.dirname(__FILE__)
-  exec 'irb -I lib/ -I lib/map -r map'
+chdir File.dirname(__FILE__)
+exec 'irb -I lib/ -I lib/cellular_map -r map'
 end
  
-desc 'Generate documentation for the map gem.'
+desc 'Generate documentation for the cellular map gem.'
 Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.rdoc_dir = 'doc'
-  rdoc.title = 'Map'
+  rdoc.title = 'Cellular Map'
   rdoc.options << '--line-numbers' << '--inline-source'
   rdoc.rdoc_files.include('LICENSE')
   rdoc.rdoc_files.include('README')
@@ -34,7 +34,7 @@ end
 desc 'Clean up files.'
 task :clean do |t|
   FileUtils.rm_rf "doc"
-  Dir.glob("map-*.gem").each { |f| FileUtils.rm f }
+  Dir.glob("cellular_map-*.gem").each { |f| FileUtils.rm f }
 end
  
 include_file_globs = ["README*",
@@ -43,16 +43,16 @@ include_file_globs = ["README*",
                       "{lib,test}/**/*"]
 exclude_file_globs = []
 spec = Gem::Specification.new do |s|
-  s.name = "Map"
-  s.version = Map::VERSION
+  s.name = "cellular_map"
+  s.version = CellularMap::VERSION
   s.author = "Michel Belleville"
   s.email = "michel.belleville@gmail.com"
-  s.homepage = "http://github.com/Bastes/Map/"
+  s.homepage = "http://github.com/Bastes/CellularMap/"
   s.platform = Gem::Platform::RUBY
-  s.summary = "A simple 2d cellular maps."
+  s.summary = "A simple 2d cellular map."
   s.files = FileList[include_file_globs].to_a - FileList[exclude_file_globs].to_a
   s.require_path = "lib"
-  s.autorequire = "map"
+  s.autorequire = "cellular_map"
   s.test_files = FileList["{test}/**/*test.rb"].to_a
   s.has_rdoc = true
   s.extra_rdoc_files = ["README"]

@@ -2,7 +2,7 @@ require 'test/helper'
 
 class CellTest < Test::Unit::TestCase
   context("In a map") {
-    setup { @map = Map::Map.new }
+    setup { @map = CellularMap::Map.new }
 
     context("a random cell") {
       setup { @cell = @map[10, -7] }
