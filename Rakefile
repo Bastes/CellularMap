@@ -10,10 +10,25 @@ task :default => [:clean, :test]
  
 desc 'Test the cellular map gem.'
 Rake::TestTask.new(:test) do |t|
-t.libs << 'lib'
-t.pattern = 'test/**/*_test.rb'
-t.verbose = true
+  t.libs << 'lib'
+  t.pattern = 'test/**/*_test.rb'
+  t.verbose = true
 end
+
+begin
+  require 'rcov/rcovtask'
+  desc 'Test coverage reports.'
+  Rcov::RcovTask.new do |t|
+    t.libs << 'test'
+    t.pattern = 'test/**/*_test.rb'
+    t.verbose = true
+  end
+rescue LoadError
+  task :rcov do
+    abort "RCov is not available. In order to run rcov, you must: sudo gem install spicycode-rcov"
+  end
+end
+
 
 desc 'Start an IRB session with all necessary files required.'
 task :shell do |t|
@@ -34,6 +49,7 @@ end
 desc 'Clean up files.'
 task :clean do |t|
   FileUtils.rm_rf "doc"
+  FileUtils.rm_rf "coverage"
   Dir.glob("cellular_map-*.gem").each { |f| FileUtils.rm f }
 end
  
