@@ -11,7 +11,7 @@ task :default => [:clean, :test]
 desc 'Test the cellular map gem.'
 Rake::TestTask.new(:test) do |t|
   t.libs << 'lib'
-  t.pattern = 'test/**/*_test.rb'
+  t.pattern = 'test/**/test_*.rb'
   t.verbose = true
 end
 
@@ -20,7 +20,7 @@ begin
   desc 'Test coverage reports.'
   Rcov::RcovTask.new do |t|
     t.libs << 'test'
-    t.pattern = 'test/**/*_test.rb'
+    t.pattern = 'test/**/test_*.rb'
     t.verbose = true
   end
 rescue LoadError
@@ -72,7 +72,7 @@ spec = Gem::Specification.new do |s|
   EOF
   s.files = FileList[include_file_globs].to_a - FileList[exclude_file_globs].to_a
   s.require_path = "lib"
-  s.test_files = FileList["{test}/**/*test.rb"].to_a
+  s.test_files = FileList["{test}/**/test_*.rb"].to_a
   s.has_rdoc = true
   s.extra_rdoc_files = ["README"]
   s.rdoc_options << '--line-numbers' << '--inline-source'

@@ -1,6 +1,6 @@
 require 'test/helper'
 
-class MapTest < Test::Unit::TestCase
+class TestMap < Test::Unit::TestCase
   context("An empty map cell") {
     setup { @map = CellularMap::Map.new }
 

@@ -1,6 +1,6 @@
 require 'test/helper'
 
-class ZoneTest < Test::Unit::TestCase
+class TestZone < Test::Unit::TestCase
   context("In a map") {
     setup { @map = CellularMap::Map.new }
 
