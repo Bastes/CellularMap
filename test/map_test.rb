@@ -15,6 +15,12 @@ class MapTest < Test::Unit::TestCase
 
     should("retrieve stored values") {
       assert_equal :something, @map[-5, 22].content }
+
+    context("once emptied") {
+      setup { @map[-5, 22] = nil }
+
+      should("stay empty") { assert_equal nil, @map[-5, 22].content }
+    }
   }
 
   context("A map with a bunch of cells filled") {
