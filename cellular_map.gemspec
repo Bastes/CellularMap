@@ -6,8 +6,10 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Michel Belleville"]
-  s.autorequire = %q{cellular_map}
   s.date = %q{2009-12-28}
+  s.description = %q{    This gem aims to offer a very easy to use infinite cellular map allowing
+    movement through vectors and use of zones.
+}
   s.email = %q{michel.belleville@gmail.com}
   s.extra_rdoc_files = ["README"]
   s.files = ["README", "LICENSE", "Rakefile", "lib/cellular_map", "lib/cellular_map/cell.rb", "lib/cellular_map/map.rb", "lib/cellular_map/zone.rb", "lib/cellular_map.rb", "test/cell_test.rb", "test/helper.rb", "test/map_test.rb", "test/zone_test.rb"]

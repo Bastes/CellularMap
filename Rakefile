@@ -50,9 +50,12 @@ spec = Gem::Specification.new do |s|
   s.homepage = "http://github.com/Bastes/CellularMap/"
   s.platform = Gem::Platform::RUBY
   s.summary = "A simple 2d cellular map."
+  s.description = <<-EOF
+    This gem aims to offer a very easy to use infinite cellular map allowing
+    movement through vectors and use of zones.
+  EOF
   s.files = FileList[include_file_globs].to_a - FileList[exclude_file_globs].to_a
   s.require_path = "lib"
-  s.autorequire = "cellular_map"
   s.test_files = FileList["{test}/**/*test.rb"].to_a
   s.has_rdoc = true
   s.extra_rdoc_files = ["README"]
