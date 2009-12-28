@@ -1,4 +1,4 @@
-doc
+rdoc
 *.swp
 .DS_Store
 .vimproject
