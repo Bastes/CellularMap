@@ -13,8 +13,7 @@ module CellularMap
     attr_reader :map
 
     def initialize(x, y, map) # :nodoc:
-      @x = x.respond_to?(:to_i) ? (x.to_i..x.to_i) : x
-      @y = y.respond_to?(:to_i) ? (y.to_i..y.to_i) : y
+      @x, @y = rangeize(x, y)
       @map = map
     end
     
@@ -35,14 +34,12 @@ module CellularMap
 
     # Access to a cell inside the zone.
     def [](x, y)
-      if x.respond_to?(:to_i) && y.respond_to?(:to_i)
-        @map[@x.min + x.to_i, @y.min + y.to_i]
-      else
-        x = x.to_i..x.to_i if x.respond_to?(:to_i)
-        y = y.to_i..y.to_i if y.respond_to?(:to_i)
-        @map[(@x.min + x.min)..(@x.min + x.max),
-             (@y.min + y.min)..(@y.min + y.max)]
-      end
+      @map[*relative(x, y)]
+    end
+
+    # Modification of a cell's content inside the zone.
+    def []=(x, y, content)
+      @map[*relative(x, y)] = content
     end
 
     def ==(other) # :nodoc:
@@ -61,6 +58,24 @@ module CellularMap
     # (first to last lines, first to last columns for each line)
     def to_a
       @y.collect { |y| @x.collect { |x| Cell.new(x, y, @map) } }
+    end
+
+    protected
+
+    # Converts coordinates to coordinates relative to inside the map.
+    def relative(x, y)
+      if x.respond_to?(:to_i) && y.respond_to?(:to_i)
+        [@x.min + x.to_i, @y.min + y.to_i]
+      else
+        x, y = rangeize(x, y)
+        [ (@x.min + x.min)..(@x.min + x.max),
+          (@y.min + y.min)..(@y.min + y.max) ]
+      end
+    end
+
+    # Converts given coordinates to ranges if necessary.
+    def rangeize(x, y)
+      [x, y].collect { |i| i.respond_to?(:to_i) ? (i.to_i..i.to_i) : i }
     end
   end
 end

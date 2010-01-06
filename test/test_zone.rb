@@ -20,6 +20,12 @@ class TestZone < Test::Unit::TestCase
 
       should("allow access to other zones relatively to boundaries") {
         assert_equal @map[-2..5, 6..11], @zone[-1..6, 9..14] }
+
+      should("allow to fill cells relatively to its boundaries") {
+        @zone[2, 1] = 'thingy'
+        assert_equal 'thingy', @zone[2, 1].content
+        assert_equal 'thingy', @map[1, -2].content
+      }
     }
 
     context("with a few filled cells") {
