@@ -34,7 +34,7 @@ module CellularMap
 
     # Selecting a related cell through a vector movement.
     def +(vector)
-      Cell.new(@x + vector.first, @y + vector.last, @map)
+      @map[@x + vector.first, @y + vector.last]
     end
 
     # Selecting a related cell through a vector movement.
