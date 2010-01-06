@@ -44,5 +44,10 @@ module CellularMap
     def to_a
       @store.keys.collect { |k| Cell.new(*(k + [self])) }
     end
+
+    # Empties the map filled cells.
+    def empty!
+      @store = {}
+    end
   end
 end

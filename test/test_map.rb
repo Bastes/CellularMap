@@ -52,5 +52,10 @@ class TestMap < Test::Unit::TestCase
       res.each { |c| inside[[c.x, c.y]] = c.content }
       assert_equal @sample, inside
     }
+
+    should("be emptied at will") {
+      @map.empty!
+      @map.each { |cell| flunk "There should be no more filled cells." }
+    }
   }
 end
