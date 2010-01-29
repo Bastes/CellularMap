@@ -3,7 +3,7 @@ require 'cellular_map/zone'
 
 module CellularMap
   # =Map
-  # 
+  #
   # Maps are limitless, only non-empty (nil content) cells are actually stored.
   #
   # (see README for examples)
@@ -38,6 +38,11 @@ module CellularMap
     def each # :yields: cell
       @store.keys.each { |k| yield Cell.new(*(k + [self])) }
       self
+    end
+
+    # Collecting all filled cells
+    def collect # :yields: cell
+      @store.keys.collect { |k| yield Cell.new(*(k + [self])) }
     end
 
     # Converts to map to an array of filled cells

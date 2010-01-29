@@ -43,6 +43,12 @@ class TestMap < Test::Unit::TestCase
       assert_equal @map, result
     }
 
+    should("collect all filled cells") {
+      expected = @sample.collect { |c, v| c + [v] }.sort!
+      inside = @map.collect { |cell| [cell.x, cell.y, cell.content] }.sort!
+      assert_equal expected, inside
+    }
+
     should("be convertible to an array of cells") {
       res = @map.to_a
       assert res.is_a? Array
