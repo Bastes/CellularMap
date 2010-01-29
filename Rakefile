@@ -1,5 +1,5 @@
 require 'rake'
- 
+
 begin
   require 'jeweler'
   include_file_globs = ["README*",
@@ -24,13 +24,13 @@ begin
     gem.has_rdoc = true
     gem.extra_rdoc_files = ["README*"]
     gem.rdoc_options << '--line-numbers' << '--inline-source'
-    gem.add_development_dependency("thoughtbot-shoulda", ">= 0")
+    gem.add_development_dependency("shoulda", ">= 0")
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
   puts "Jeweler (or a dependency) not available. Install it with: gem install jeweler"
 end
- 
+
 require 'rake/testtask'
 desc 'Test the cellular map gem.'
 Rake::TestTask.new(:test) do |t|
@@ -56,7 +56,7 @@ end
 task :test => :check_dependencies
 
 task :default => :test
- 
+
 require 'rake/rdoctask'
 desc 'Generate documentation for the cellular map gem.'
 Rake::RDocTask.new(:rdoc) do |rdoc|
