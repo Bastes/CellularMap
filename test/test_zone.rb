@@ -59,6 +59,12 @@ class TestZone < Test::Unit::TestCase
           assert_equal @positions, inside
         }
 
+        should("collect all its cells in a basic one-dimension array") {
+          inside = @zone.collect { |cell| [cell.x, cell.y, cell.content] }.sort!
+          outside = @positions.collect { |x, y| [x, y, @sample[[x, y]]] }.sort!
+          assert_equal outside, inside
+        }
+
         should("be convertible to an array of all its cells") {
           res = @zone.to_a
           assert res.is_a? Array

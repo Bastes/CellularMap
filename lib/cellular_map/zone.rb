@@ -6,7 +6,7 @@ module CellularMap
   #
   # (see README for examples)
   class Zone
-    
+
     # Zone's boundaries
     attr_reader :x, :y
     # Map the zone's part of
@@ -16,7 +16,7 @@ module CellularMap
       @x, @y = rangeize(x, y)
       @map = map
     end
-    
+
     # Zone's length.
     def length
       width * height
@@ -53,9 +53,16 @@ module CellularMap
       @y.each { |y| @x.each { |x| yield Cell.new(x, y, @map) } }
     end
 
+    # Collecting cells inside the zone.
+    #
+    # see each
+    def collect # :yields: cell
+      @y.inject([]) { |r, y| r + @x.collect { |x| yield Cell.new(x, y, @map) } }
+    end
+
     # Making an array of arrays of all cells inside the zone.
     #
-    # (first to last lines, first to last columns for each line)
+    # see each
     def to_a
       @y.collect { |y| @x.collect { |x| Cell.new(x, y, @map) } }
     end
