@@ -17,7 +17,7 @@ module CellularMap
       @y = y.to_i
       @map = map
     end
-    
+
     # Cell's content.
     def content
       @map.store[[x, y]]
@@ -29,6 +29,7 @@ module CellularMap
     end
 
     def ==(other) # :nodoc:
+      self.class == other.class &&
       [@x, @y, @map] == [other.x, other.y, other.map]
     end
 

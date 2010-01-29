@@ -16,6 +16,11 @@ class TestCell < Test::Unit::TestCase
       should("be different from another cell") {
         assert_not_equal @map[3, 19], @cell }
 
+      should("be different from something else entirely") {
+        assert_not_equal :something_else_entirely, @cell
+        assert_not_equal 15, @cell
+      }
+
       context("once filled") {
         setup { @cell.content = "anything" }
 
