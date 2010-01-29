@@ -51,6 +51,7 @@ module CellularMap
     # (first to last lines, first to last columns for each line)
     def each # :yields: cell
       @y.each { |y| @x.each { |x| yield Cell.new(x, y, @map) } }
+      self
     end
 
     # Collecting cells inside the zone.

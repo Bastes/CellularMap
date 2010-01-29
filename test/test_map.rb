@@ -43,6 +43,11 @@ class TestMap < Test::Unit::TestCase
       assert_equal @map, result
     }
 
+    should("return itself after iterating") {
+      result = @map.each {}
+      assert_same @map, result
+    }
+
     should("collect all filled cells") {
       expected = @sample.collect { |c, v| c + [v] }.sort!
       inside = @map.collect { |cell| [cell.x, cell.y, cell.content] }.sort!

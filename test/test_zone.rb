@@ -59,6 +59,11 @@ class TestZone < Test::Unit::TestCase
           assert_equal @positions, inside
         }
 
+        should("return itself after iterating") {
+          result = @zone.each {}
+          assert_same @zone, result
+        }
+
         should("collect all its cells in a basic one-dimension array") {
           inside = @zone.collect { |cell| [cell.x, cell.y, cell.content] }.sort!
           outside = @positions.collect { |x, y| [x, y, @sample[[x, y]]] }.sort!
