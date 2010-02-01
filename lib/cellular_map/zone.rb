@@ -6,6 +6,7 @@ module CellularMap
   #
   # (see README for examples)
   class Zone
+    include Enumerable
 
     # Zone's boundaries
     attr_reader :x, :y
@@ -52,13 +53,6 @@ module CellularMap
     def each # :yields: cell
       @y.each { |y| @x.each { |x| yield Cell.new(x, y, @map) } }
       self
-    end
-
-    # Collecting cells inside the zone.
-    #
-    # see each
-    def collect # :yields: cell
-      @y.inject([]) { |r, y| r + @x.collect { |x| yield Cell.new(x, y, @map) } }
     end
 
     # Making an array of arrays of all cells inside the zone.

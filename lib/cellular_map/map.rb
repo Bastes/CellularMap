@@ -8,6 +8,7 @@ module CellularMap
   #
   # (see README for examples)
   class Map
+    include Enumerable
 
     # Store of actually filled cells.
     attr_reader :store
@@ -38,16 +39,6 @@ module CellularMap
     def each # :yields: cell
       @store.keys.each { |k| yield Cell.new(*(k + [self])) }
       self
-    end
-
-    # Collecting all filled cells
-    def collect # :yields: cell
-      @store.keys.collect { |k| yield Cell.new(*(k + [self])) }
-    end
-
-    # Converts to map to an array of filled cells
-    def to_a
-      @store.keys.collect { |k| Cell.new(*(k + [self])) }
     end
 
     # Empties the map filled cells.
