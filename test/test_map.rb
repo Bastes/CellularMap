@@ -50,7 +50,13 @@ class TestMap < Test::Unit::TestCase
 
     should("collect all filled cells") {
       expected = @sample.collect { |c, v| c + [v] }.sort!
-      inside = @map.collect { |cell| [cell.x, cell.y, cell.content] }.sort!
+      inside = @map.collect { |cell| [cell.x, cell.y, cell.content] }.sort
+      assert_equal expected, inside
+    }
+
+    should("inject its filled cells in a result") {
+      expected = @sample.collect { |c, v| c + [v] }.sort!
+      inside = @map.inject([]) { |r, c| r + [[c.x, c.y, c.content]] }.sort
       assert_equal expected, inside
     }
 
