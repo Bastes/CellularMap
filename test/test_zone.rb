@@ -39,6 +39,7 @@ class TestZone < Test::Unit::TestCase
           [53, 11] => /dolor sid amet/,
           [7, -22] => 0..11
         }).each { |k, v| @map[*k] = v }
+        @sort_order = lambda { |a, b| (a[0] <=> b[0]) * 2 + (a[1] <=> b[1]) }
       }
 
       context("a certain zone") {
@@ -65,8 +66,18 @@ class TestZone < Test::Unit::TestCase
         }
 
         should("collect all its cells in a basic one-dimension array") {
-          inside = @zone.collect { |cell| [cell.x, cell.y, cell.content] }.sort!
-          outside = @positions.collect { |x, y| [x, y, @sample[[x, y]]] }.sort!
+          inside, outside = [
+            @zone.collect { |cell| [cell.x, cell.y, cell.content] },
+            @positions.collect { |x, y| [x, y, @sample[[x, y]]] }
+          ].collect { |a| a.sort &@sort_order }
+          assert_equal outside, inside
+        }
+
+        should("inject its cells in a result") {
+          inside, outside = [
+            @zone.inject([]) { |r, c| r + [[c.x, c.y, c.content]] },
+            @positions.collect { |x, y| [x, y, @sample[[x, y]]] }
+          ].collect { |a| a.sort &@sort_order }
           assert_equal outside, inside
         }
 
