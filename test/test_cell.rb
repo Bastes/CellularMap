@@ -35,4 +35,30 @@ class TestCell < Test::Unit::TestCase
         assert_equal @map[4, -10], @cell - [6, 3] }
     }
   }
+
+  context("An array of cells") {
+    setup {
+      @map = CellularMap::Map.new
+      @cells = [
+        @map[0, 0],
+        @map[1, 5],
+        @map[-4, 7],
+        @map[3, 8],
+        @map[6, -9]
+      ]
+      @duplicated = @cells + [
+        @map[0, 0],
+        @map[1, 5],
+      ]
+      @sort_order = lambda { |a, b| 2 * (a[0] <=> b[0]) + (a[1] <=> b[1]) }
+    }
+
+    should("remove duplicated elements") {
+      expected, obtained = [
+        @cells,
+        @duplicated.uniq
+      ].collect { |a| a.collect { |c| [c.x, c.y] }.sort &@sort_order }
+      assert_equal expected, obtained
+    }
+  }
 end

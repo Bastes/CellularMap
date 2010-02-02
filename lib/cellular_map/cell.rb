@@ -28,9 +28,17 @@ module CellularMap
       @map[@x, @y] = content
     end
 
+    def hash # :nodoc:
+      x + y
+    end
+
     def ==(other) # :nodoc:
       self.class == other.class &&
       [@x, @y, @map] == [other.x, other.y, other.map]
+    end
+
+    def eql?(other) # :nodoc:
+      self == other
     end
 
     # Selecting a related cell through a vector movement.
