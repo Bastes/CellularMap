@@ -45,5 +45,15 @@ module CellularMap
     def empty!
       @store = {}
     end
+
+    def ==(other) # :nodoc:
+      @store.length == other.store.length &&
+        @store.collect { |k, v| other[*k].content == v }.uniq == [true]
+    end
+
+    def initialize_copy(other) # :nodoc:
+      @store = {}
+      other.each { |c| self[c.x, c.y] = c.content }
+    end
   end
 end

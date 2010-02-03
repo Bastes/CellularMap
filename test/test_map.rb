@@ -74,5 +74,26 @@ class TestMap < Test::Unit::TestCase
       @map.empty!
       @map.each { |cell| flunk "There should be no more filled cells." }
     }
+
+    context("and its duplicate") {
+      setup { @duplicate = @map.dup }
+      should("be identical") { assert_equal @map, @duplicate }
+      should("not be the same instance") { assert_not_same @map, @duplicate }
+      context("evolving") {
+        setup {
+          @map[5, 2] = :anything
+          @duplicate[1, 8] = :blah
+        }
+        should("have retained their values") {
+          assert_equal :anything, @map[5, 2].content
+          assert_equal :blah, @duplicate[1, 8].content
+        }
+        should("not have retained the other one's values") {
+          assert_not_equal :blah, @map[1, 8].content
+          assert_not_equal :anything, @duplicate[5, 2].content
+        }
+        should("be different now") { assert_not_equal @map, @duplicate }
+      }
+    }
   }
 end
