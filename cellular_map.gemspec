@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cellular_map}
-  s.version = "0.4.1"
+  s.version = "0.5.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Michel Belleville"]
-  s.date = %q{2010-02-02}
+  s.date = %q{2010-02-03}
   s.description = %q{      This gem aims to offer a very easy to use infinite cellular map allowing
       movement through vectors and use of zones.
 }
