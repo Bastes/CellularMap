@@ -44,7 +44,7 @@ module CellularMap
     end
 
     def ==(other) # :nodoc:
-      [@x, @y, @map] == [other.x, other.y, other.map]
+      ! self.detect { |c| ! (other.map[c.x, c.y].content == c.content) }
     end
 
     # Iterating over each cells inside the zone.
@@ -78,6 +78,11 @@ module CellularMap
     # Converts given coordinates to ranges if necessary.
     def rangeize(x, y)
       [x, y].collect { |i| i.respond_to?(:to_i) ? (i.to_i..i.to_i) : i }
+    end
+
+    def initialize_copy(other) # :nodoc:
+      @map = other.map.dup
+      @map.each { |c| c.content = nil unless x === c.x && y === c.y }
     end
   end
 end

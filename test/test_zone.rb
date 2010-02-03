@@ -95,6 +95,23 @@ class TestZone < Test::Unit::TestCase
           } }
           assert_equal @positions, inside
         }
+
+        context("and its duplicate") {
+          setup { @duplicate = @zone.dup }
+          should("be identical") { assert_equal @zone, @duplicate }
+          should("not be the same instance") {
+            assert_not_same @zone, @duplicate }
+          should("not be on the same map") {
+            assert_not_same @zone.map, @duplicate.map }
+          should("have duplicated only the cells inside the zone") {
+            expected, obtained = [
+              @duplicate.map.to_a,
+              @duplicate.reject { |c| c.content.nil? }
+            ].collect { |a|
+              a.collect { |c| [c.x, c.y, c.content] }.sort &@sort_order }
+            assert_equal expected, obtained
+          }
+        }
       }
     }
   }
