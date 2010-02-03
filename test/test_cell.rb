@@ -39,25 +39,40 @@ class TestCell < Test::Unit::TestCase
   context("An array of cells") {
     setup {
       @map = CellularMap::Map.new
-      @cells = [
+      @sorted = [
+        @map[6, -9],
         @map[0, 0],
+        @map[0, 5],
         @map[1, 5],
         @map[-4, 7],
+        @map[0, 7],
+        @map[3, 7],
         @map[3, 8],
-        @map[6, -9]
+      ]
+      @cells = [
+        @map[3, 8],
+        @map[3, 7],
+        @map[1, 5],
+        @map[0, 0],
+        @map[0, 7],
+        @map[-4, 7],
+        @map[0, 5],
+        @map[6, -9],
       ]
       @duplicated = @cells + [
         @map[0, 0],
         @map[1, 5],
       ]
-      @sort_order = lambda { |a, b| 2 * (a[0] <=> b[0]) + (a[1] <=> b[1]) }
     }
+
+    should("be easy to sort (by rows then by columns)") {
+      assert_equal @sorted, @cells.sort }
 
     should("remove duplicated elements") {
       expected, obtained = [
         @cells,
         @duplicated.uniq
-      ].collect { |a| a.collect { |c| [c.x, c.y] }.sort &@sort_order }
+      ].collect { |a| a.collect { |c| [c.x, c.y] }.sort }
       assert_equal expected, obtained
     }
   }

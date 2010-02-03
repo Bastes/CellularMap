@@ -37,6 +37,10 @@ module CellularMap
       [@x, @y, @map] == [other.x, other.y, other.map]
     end
 
+    def <=>(other) # :nodoc:
+      2 * (y <=> other.y) + (x <=> other.x)
+    end
+
     def eql?(other) # :nodoc:
       self == other
     end
