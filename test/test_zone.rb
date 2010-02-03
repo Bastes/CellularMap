@@ -107,8 +107,7 @@ class TestZone < Test::Unit::TestCase
             expected, obtained = [
               @duplicate.map.to_a,
               @duplicate.reject { |c| c.content.nil? }
-            ].collect { |a|
-              a.collect { |c| [c.x, c.y, c.content] }.sort &@sort_order }
+            ].collect { |a| a.sort }
             assert_equal expected, obtained
           }
         }
